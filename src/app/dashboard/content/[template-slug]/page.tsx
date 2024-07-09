@@ -8,6 +8,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { chatSession } from "@/utils/AIModel";
+import { db } from "@/utils/db";
+import { AIOutput } from "@/utils/schema";
+import { useUser } from "@clerk/nextjs";
+import moment from "moment"
 
 interface PROPSINTERFACE {
   params: {
@@ -22,6 +26,7 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
 
   const [loading, setLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<string>("");
+  const {user} = useUser()
 
   const GenerateAIContent = async (formData: any) => {
     try {
@@ -36,12 +41,24 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
       }
       console.log(result.response.text());
       setLoading(false);
-      setAiResponse(result.response.text());
+      setAiResponse(result?.response.text());
+      await saveInDB(formData, selectedTemplate?.slug, result?.response.text())
     } catch (error) {
       setLoading(false);
       alert(error);
     }
   };
+
+  const saveInDB = async(formData:any, slug:any, aiResponse:any) => {
+    const result = await db.insert(AIOutput).values({
+      formData:formData,
+      templateSlug: slug,
+      aiResponse: aiResponse,
+      createdAt: moment().format("DD-MM-yyyy"),
+      createdBy: user?.primaryEmailAddress?.emailAddress || "",
+    })
+    console.log(result);
+  }
 
   return (
     <div className="p-10">
