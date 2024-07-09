@@ -1,29 +1,34 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import { TEMPLATE } from "../../_components/TemplateList";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Loader2Icon } from "lucide-react";
 
 interface PROPSINTERFACE {
   selectedTemplate?: TEMPLATE;
-  userFormInput: any
+  userFormInput: any;
+  loading: boolean;
 }
 
-const FormSection = ({ selectedTemplate, userFormInput }: PROPSINTERFACE) => {
+const FormSection = ({
+  selectedTemplate,
+  userFormInput,
+  loading,
+}: PROPSINTERFACE) => {
   const [formData, setFormData] = useState<any>();
 
-  const handleInputChange = (e:any) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]:value})
-  }
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const handleSubmit = (e:any) => {
-        e.preventDefault();
-        userFormInput(formData)
-    }
-
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    userFormInput(formData);
+  };
 
   return (
     <>
@@ -46,13 +51,23 @@ const FormSection = ({ selectedTemplate, userFormInput }: PROPSINTERFACE) => {
               <div className="my-2 flex flex-col gap-2 mb-7" key={index}>
                 <label className="font-bold">{item.label}</label>
                 {item.field == "input" ? (
-                  <Input name={item.name} required={item.required} onChange={handleInputChange} />
+                  <Input
+                    name={item.name}
+                    required={item.required}
+                    onChange={handleInputChange}
+                  />
                 ) : item.field == "textarea" ? (
-                  <Textarea name={item.name} required={item.required} onChange={handleInputChange} />
+                  <Textarea
+                    name={item.name}
+                    required={item.required}
+                    onChange={handleInputChange}
+                  />
                 ) : null}
               </div>
             ))}
-            <Button type="submit" className="w-full py-6">Generate Content</Button>
+            <Button type="submit" disabled={loading} className="w-full py-6">
+              {loading ? <Loader2Icon className="animate-spin" /> : "Generate Content"}
+            </Button>
           </form>
         </div>
       )}
