@@ -13,6 +13,8 @@ import { AIOutput } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment"
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
+import { useRouter } from "next/navigation";
+import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext";
 
 interface PROPSINTERFACE {
   params: {
@@ -28,12 +30,16 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
   const [loading, setLoading] = useState(false);
   const [aiResponse, setAiResponse] = useState<string>("");
   const {user} = useUser()
-  const {totalUsage, setTotalUsage} = useContext(TotalUsageContext)
+  const {totalUsage, setTotalUsage} = useContext(TotalUsageContext);
+  const router = useRouter();
+  const {userSubscription, setUserSubscription} = useContext(UserSubscriptionContext);  
+
 
   const GenerateAIContent = async (formData: any) => {
     try {
-      if(totalUsage >= 10000){
+      if(totalUsage >= 10000 && !userSubscription){
         console.log("please upgrade your existing plan")
+        router.push("/billing")
         return;
       }
       setLoading(true);
