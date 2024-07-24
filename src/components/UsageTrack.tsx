@@ -8,6 +8,7 @@ import { eq } from 'drizzle-orm';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
 import { EmailAddress } from '@clerk/nextjs/server';
+import { UpdateCreditUsageContext } from '@/app/(context)/UpdateCreditUsageContext';
 
 const UsageTrack = () => {
 
@@ -15,13 +16,15 @@ const UsageTrack = () => {
   const {totalUsage, setTotalUsage} = useContext(TotalUsageContext)
   const {userSubscription, setUserSubscription} = useContext(UserSubscriptionContext);  
   const [maxWords, setMaxWords] = useState<number>(10000);
+  const {updateCreditUsage, setUpdateCreditUsage} = useContext(UpdateCreditUsageContext);  
+
 
   useEffect(() => {
     if(user && user.primaryEmailAddress){
       fetchData(user)
       isUserSubscribed(user)
     }
-  }, [user])
+  }, [user && updateCreditUsage])
 
   const fetchData = async (user:any) => {
     const result = await db.select().from(AIOutput).where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress));

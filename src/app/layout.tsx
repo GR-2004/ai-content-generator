@@ -6,6 +6,7 @@ import {ClerkProvider} from "@clerk/nextjs"
 import { useState } from "react";
 import { TotalUsageContext } from "./(context)/TotalUsageContext";
 import { UserSubscriptionContext } from "./(context)/UserSubscriptionContext";
+import { UpdateCreditUsageContext } from "./(context)/UpdateCreditUsageContext";
 
 const inter = Outfit({ subsets: ["latin"] });
 
@@ -22,15 +23,18 @@ export default function RootLayout({
 
   const [totalUsage, setTotalUsage] = useState<Number>(0);
   const [userSubscription, setUserSubscription] = useState<Boolean>(false);  
+  const [updateCreditUsage, setUpdateCreditUsage] = useState<Date>();  
 
   return (
     <TotalUsageContext.Provider value={{totalUsage, setTotalUsage}}>
       <UserSubscriptionContext.Provider value={{userSubscription, setUserSubscription}}>
+        <UpdateCreditUsageContext.Provider value={{updateCreditUsage, setUpdateCreditUsage}}>
     <ClerkProvider>
     <html lang="en">
       <body className={inter.className}>{children}</body>
     </html>
     </ClerkProvider>
+    </UpdateCreditUsageContext.Provider>
     </UserSubscriptionContext.Provider>
     </TotalUsageContext.Provider>
   );
