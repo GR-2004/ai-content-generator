@@ -14,7 +14,7 @@ function Header() {
       </div>
       <div className='flex gap-5 items-center'>
         <h2 className='bg-primary p-1 rounded-full text-sm text-white px-2'>
-        🔥 Join Membership just for $9.99/Month</h2>
+        🔥 Join Membership just for 100/Month</h2>
       <UserButton/>
       </div>
     </div>
