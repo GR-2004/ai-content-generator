@@ -9,6 +9,7 @@ import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
 import { EmailAddress } from '@clerk/nextjs/server';
 import { UpdateCreditUsageContext } from '@/app/(context)/UpdateCreditUsageContext';
+import Link from 'next/link';
 
 const UsageTrack = () => {
 
@@ -17,7 +18,6 @@ const UsageTrack = () => {
   const {userSubscription, setUserSubscription} = useContext(UserSubscriptionContext);  
   const [maxWords, setMaxWords] = useState<number>(10000);
   const {updateCreditUsage, setUpdateCreditUsage} = useContext(UpdateCreditUsageContext);  
-
 
   useEffect(() => {
     if(user && user.primaryEmailAddress){
@@ -56,9 +56,12 @@ const UsageTrack = () => {
         <div className='h-2 bg-[#9981f9] w-full rounded-full mt-3'>
           <div className='h-2 bg-white rounded-full' style={{width: (totalUsage/maxWords)*100+"%"}}></div>
         </div>
-        <h2 className='text-sm my-2'>${totalUsage}/{maxWords} credit used</h2>
+        <h2 className='text-sm my-2'>{totalUsage}/{maxWords} credit used</h2>
       </div>
+      <Link href="/billing">
       <Button variant={"secondary"} className='w-full my-3 text-primary'>Upgrade</Button>
+      </Link>
+
     </div>
   )
 }
