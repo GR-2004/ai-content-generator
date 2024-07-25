@@ -31,7 +31,9 @@ export default function RootLayout({
         <UpdateCreditUsageContext.Provider value={{updateCreditUsage, setUpdateCreditUsage}}>
     <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
     </ClerkProvider>
     </UpdateCreditUsageContext.Provider>

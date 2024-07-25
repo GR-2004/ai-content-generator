@@ -1,13 +1,31 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
+"use client";
+import React, { useState } from "react";
+import SearchSection from "@/components/SearchSection";
+import TemplateList from "@/components/TemplateList";
+import SideNav from "@/components/SideNav";
+import Header from "@/components/Header";
 
-const page = () => {
+const DashboardPage = () => {
+  const [userSearchInput, setUserSearchInput] = useState<string>();
   return (
     <div>
-      <h1>hi</h1>
-      <Button>send me</Button>
-    </div>
-  )
-}
+      <div className="bg-slate-200 h-screen">
+      <div className="md:w-64 hidden md:block fixed">
+        <SideNav />
+      </div>
+      <div className="md:ml-64">
+        <Header />
+      {/* Search Section */}
+      <SearchSection
+        onSearchInput={(value: string) => setUserSearchInput(value)}
+        />
 
-export default page
+      {/* template list section */}
+      <TemplateList userSearchInput={userSearchInput} />
+      </div>
+    </div>
+    </div>
+  );
+};
+
+export default DashboardPage;

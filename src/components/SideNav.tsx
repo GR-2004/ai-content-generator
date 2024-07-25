@@ -21,11 +21,6 @@ const SideNav = () => {
       path: "/",
     },
     {
-      name: "Dashboard",
-      icon: LayoutDashboard,
-      path: "/dashboard",
-    },
-    {
       name: "History",
       icon: FileClock,
       path: "/history",

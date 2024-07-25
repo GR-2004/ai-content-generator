@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import CopyButton from "./_components/CopyButton";
 import Image from "next/image";
 import Templates from "@/data/Templates";
-import { TEMPLATE } from "../dashboard/_components/TemplateList";
+import { TEMPLATE } from "../../components/TemplateList";
 import { AIOutput } from "@/utils/schema";
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/utils/db";
