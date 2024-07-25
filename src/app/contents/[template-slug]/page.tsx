@@ -88,7 +88,7 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
       <div className="md:ml-64">
         <Header />
         <div className="p-10">
-          <Link href={"/dashboard"}>
+          <Link href={"/"}>
             <Button>
               <ArrowLeft />
               Back

@@ -51,7 +51,7 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="bg-slate-200 h-screen">
+    <div className="bg-slate-200 h-full">
       <div className="md:w-64 hidden md:block fixed">
         <SideNav />
       </div>
@@ -72,7 +72,7 @@ const HistoryPage = () => {
           {
            historyList && historyList.length>0 ? historyList.map((item: HISTORY, index: number) => (
             <div key={index}>
-              <div className="grid grid-cols-7 my-5 py-3 px-3">
+              <div className="grid grid-cols-7 my-5 py-3 px-3 ">
                 <h2 className="col-span-2 flex gap-2 items-center">
                   <Image
                     src={GetTemplateName(item.templateSlug).icon}

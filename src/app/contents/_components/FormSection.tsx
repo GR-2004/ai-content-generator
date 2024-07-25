@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { TEMPLATE } from "../../../../components/TemplateList";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2Icon } from "lucide-react";
+import { TEMPLATE } from "@/components/TemplateList";
 
 interface PROPSINTERFACE {
   selectedTemplate?: TEMPLATE;
