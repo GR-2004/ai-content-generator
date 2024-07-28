@@ -18,6 +18,7 @@ import { UserSubscriptionContext } from "@/app/(context)/UserSubscriptionContext
 import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
 import SideNav from "@/components/SideNav";
 import Header from "@/components/Header";
+import axios from "axios";
 
 interface PROPSINTERFACE {
   params: {
@@ -70,14 +71,16 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
   };
 
   const saveInDB = async (formData: any, slug: any, aiResponse: any) => {
-    const result = await db.insert(AIOutput).values({
-      formData: formData,
-      templateSlug: slug,
-      aiResponse: aiResponse,
-      createdAt: moment().format("DD-MM-yyyy"),
-      createdBy: user?.primaryEmailAddress?.emailAddress || "",
-    });
-    console.log(result);
+    // const result = await db.insert(AIOutput).values({
+    //   formData: formData,
+    //   templateSlug: slug,
+    //   aiResponse: aiResponse,
+    //   createdAt: moment().format("DD-MM-yyyy"),
+    //   createdBy: user?.primaryEmailAddress?.emailAddress || "",
+    // });
+
+    const response:any = await axios.post("/api/AIOutput", {formData, slug, aiResponse})
+    console.log(response?.output)
   };
 
   return (

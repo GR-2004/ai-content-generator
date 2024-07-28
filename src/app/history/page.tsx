@@ -11,6 +11,8 @@ import { AIOutput } from "@/utils/schema";
 import { desc, eq } from "drizzle-orm";
 import { db } from "@/utils/db";
 import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import moment from "moment";
 
 export interface HISTORY {
   id: Number;
@@ -33,14 +35,18 @@ const HistoryPage = () => {
 
   const fetchData = async (user: any) => {
     try {
-      const result = await db
-        .select()
-        .from(AIOutput)
-        .where(eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress));
-      if (!result) {
-        alert("something went wrong while fetching data");
-      }
-      setHistoryList(result);
+      // const result = await db
+      //   .select()
+      //   .from(AIOutput)
+      //   .where(eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress));
+      // if (!result) {
+      //   alert("something went wrong while fetching data");
+      // }
+      // setHistoryList(result);
+      const response:any = await axios.get("/api/AIOutput");
+
+      console.log(response.data.output)
+      setHistoryList(response.data.output);
     } catch (error: any) {
       console.log(error.message);
     }
@@ -85,7 +91,7 @@ const HistoryPage = () => {
                 <h2 className="col-span-2 line-clamp-3 mr-3">
                   {item.aiResponse}
                 </h2>
-                <h2>{item.createdAt}</h2>
+                <h2>{moment(item.createdAt).format("DD-MM-YYYY")}</h2>
                 <h2>{item.aiResponse?.length}</h2>
                 <h2>
                   <CopyButton aiResponse={item.aiResponse} />
