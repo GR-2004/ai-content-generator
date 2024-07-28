@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 // Define the interface for the AIOutput document
 export interface AIOutputInterface extends Document {
-    formData: string;
+    formData: Record<string, any>; //Flexible object type
     aiResponse?: string; // Marking aiResponse as optional
     templateSlug: string;
     createdBy: string;
@@ -12,7 +12,7 @@ export interface AIOutputInterface extends Document {
 // Define the schema for AIOutput
 const AIOutputSchema: Schema<AIOutputInterface> = new Schema({
     formData: {
-        type: String,
+        type: Schema.Types.Mixed,
         required: [true, "formData is required"],
     },
     aiResponse: {
