@@ -71,16 +71,12 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
   };
 
   const saveInDB = async (formData: any, slug: any, aiResponse: any) => {
-    // const result = await db.insert(AIOutput).values({
-    //   formData: formData,
-    //   templateSlug: slug,
-    //   aiResponse: aiResponse,
-    //   createdAt: moment().format("DD-MM-yyyy"),
-    //   createdBy: user?.primaryEmailAddress?.emailAddress || "",
-    // });
-
-    const response:any = await axios.post("/api/AIOutput", {formData, slug, aiResponse})
-    console.log(response?.output)
+    const response: any = await axios.post("/api/AIOutput", {
+      formData,
+      slug,
+      aiResponse,
+    });
+    console.log(response?.output);
   };
 
   return (

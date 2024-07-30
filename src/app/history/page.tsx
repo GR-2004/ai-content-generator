@@ -17,7 +17,7 @@ import moment from "moment";
 export interface HISTORY {
   id: Number;
   formData: string;
-  aiResponse: string | null; 
+  aiResponse: string | null;
   templateSlug: string;
   createdBy: string;
   createdAt: string | null;
@@ -35,17 +35,8 @@ const HistoryPage = () => {
 
   const fetchData = async (user: any) => {
     try {
-      // const result = await db
-      //   .select()
-      //   .from(AIOutput)
-      //   .where(eq(AIOutput.createdBy, user.primaryEmailAddress.emailAddress));
-      // if (!result) {
-      //   alert("something went wrong while fetching data");
-      // }
-      // setHistoryList(result);
-      const response:any = await axios.get("/api/AIOutput");
-
-      console.log(response.data.output)
+      const response: any = await axios.get("/api/AIOutput");
+      console.log(response.data.output);
       setHistoryList(response.data.output);
     } catch (error: any) {
       console.log(error.message);
@@ -53,7 +44,12 @@ const HistoryPage = () => {
   };
 
   const GetTemplateName = (slug: string) => {
-    return Templates.find((template) => template.slug === slug) || {name:"", icon:""};
+    return (
+      Templates.find((template) => template.slug === slug) || {
+        name: "",
+        icon: "",
+      }
+    );
   };
 
   return (
@@ -75,33 +71,34 @@ const HistoryPage = () => {
             <h2>WORDS</h2>
             <h2>COPY</h2>
           </div>
-          {
-           historyList && historyList.length>0 ? historyList.map((item: HISTORY, index: number) => (
-            <div key={index}>
-              <div className="grid grid-cols-7 my-5 py-3 px-3 ">
-                <h2 className="col-span-2 flex gap-2 items-center">
-                  <Image
-                    src={GetTemplateName(item.templateSlug).icon}
-                    width={25}
-                    height={25}
-                    alt="icon"
-                  />
-                  {GetTemplateName(item.templateSlug)?.name}
-                </h2>
-                <h2 className="col-span-2 line-clamp-3 mr-3">
-                  {item.aiResponse}
-                </h2>
-                <h2>{moment(item.createdAt).format("DD-MM-YYYY")}</h2>
-                <h2>{item.aiResponse?.length}</h2>
-                <h2>
-                  <CopyButton aiResponse={item.aiResponse} />
-                </h2>
+          {historyList && historyList.length > 0 ? (
+            historyList.map((item: HISTORY, index: number) => (
+              <div key={index}>
+                <div className="grid grid-cols-7 my-5 py-3 px-3 ">
+                  <h2 className="col-span-2 flex gap-2 items-center">
+                    <Image
+                      src={GetTemplateName(item.templateSlug).icon}
+                      width={25}
+                      height={25}
+                      alt="icon"
+                    />
+                    {GetTemplateName(item.templateSlug)?.name}
+                  </h2>
+                  <h2 className="col-span-2 line-clamp-3 mr-3">
+                    {item.aiResponse}
+                  </h2>
+                  <h2>{moment(item.createdAt).format("DD-MM-YYYY")}</h2>
+                  <h2>{item.aiResponse?.length}</h2>
+                  <h2>
+                    <CopyButton aiResponse={item.aiResponse} />
+                  </h2>
+                </div>
+                <hr />
               </div>
-              <hr />
-            </div>
-          ))
-          : <h1 className="text-2xl font-bold m-2">No data found</h1>
-        }
+            ))
+          ) : (
+            <h1 className="text-2xl font-bold m-2">No data found</h1>
+          )}
         </div>
       </div>
     </div>
