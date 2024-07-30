@@ -110,7 +110,7 @@ export async function GET(request: NextRequest) {
         }),
         { status: 401 }
       );
-    }``
+    }
 
     // Fetch the user's details using Clerk's clerkClient
     const user = await clerkClient.users.getUser(userId);
