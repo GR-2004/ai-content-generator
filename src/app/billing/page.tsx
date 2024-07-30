@@ -29,14 +29,35 @@ const BillingPage = () => {
     }
   };
 
-  const initiatePayment = (subscriptionId: string) => {
+  const loadScript = (src:any) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const initiatePayment = async (subscriptionId: string) => {
     const razorpayKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
     if (!razorpayKeyId) {
       console.error("Razorpay Key ID is not defined");
       setLoading(false);
       return;
     }
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+   );
 
+   if (!res) {
+      alert("Razropay failed to load!!");
+      return;
+  }
     const options = {
       key: razorpayKeyId,
       subscription_id: subscriptionId,
@@ -64,13 +85,9 @@ const BillingPage = () => {
 
   const saveSubscription = async (paymentId: string) => {
     try {
-      const subscriptionResult = await db.insert(UserSubscription).values({
-        email: user?.primaryEmailAddress?.emailAddress,
-        userName: user?.fullName, // This is likely causing the error
-        active: true,
-        paymentId: paymentId,
-        joinDate: moment().format("DD/MM/yyyy"),
-      });
+      const userName = user?.fullName
+      const email = user?.primaryEmailAddress?.emailAddress
+      const subscriptionResult = await axios.post("/api/UserSubscription", {userName, email, paymentId});
       console.log(subscriptionResult);
       if (subscriptionResult) {
         window.location.reload();

@@ -10,6 +10,7 @@ import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext
 import { EmailAddress } from '@clerk/nextjs/server';
 import { UpdateCreditUsageContext } from '@/app/(context)/UpdateCreditUsageContext';
 import Link from 'next/link';
+import axios from 'axios';
 
 const UsageTrack = () => {
 
@@ -27,17 +28,27 @@ const UsageTrack = () => {
   }, [user && updateCreditUsage])
 
   const fetchData = async (user:any) => {
-    const result = await db.select().from(AIOutput).where(eq(AIOutput.createdBy, user?.primaryEmailAddress?.emailAddress));
-    let total = 0;
-    result.forEach((res) => {
-      if(res.aiResponse) total += Number(res?.aiResponse.length)
-    })
-    setTotalUsage(total)
+    try {
+      const result:any = await axios.get("/api/AIOutput");
+      console.log("usageTrack response: ", result.data.output)
+      if(!result){
+        return;
+      }
+      let total = 0;
+      result.data.output.forEach((res:any) => {
+        if(res.aiResponse) total += Number(res?.aiResponse.length)
+      })
+      setTotalUsage(total)
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const isUserSubscribed = async (user:any) => {
     try {
-      const result = await db.select().from(UserSubscription).where(eq(UserSubscription.email, user?.primaryEmailAddress?.emailAddress));
+    const result = await axios.get("/api/UserSubscription")
+    console.log(result.data.user)
       if(!result){
         console.log("subscription not found")
         return;

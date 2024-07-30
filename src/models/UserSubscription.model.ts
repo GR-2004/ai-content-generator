@@ -28,6 +28,7 @@ const UserSubscriptionSchema: Schema<UserSubscriptionInterface> = new Schema({
     },
     joinDate: {
         type: Date,
+        default: Date.now
     }
 })
 
