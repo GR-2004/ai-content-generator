@@ -7,7 +7,6 @@ import { AIOutput, UserSubscription } from '@/utils/schema';
 import { eq } from 'drizzle-orm';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
-import { EmailAddress } from '@clerk/nextjs/server';
 import { UpdateCreditUsageContext } from '@/app/(context)/UpdateCreditUsageContext';
 import Link from 'next/link';
 import axios from 'axios';
@@ -47,12 +46,15 @@ const UsageTrack = () => {
 
   const isUserSubscribed = async (user:any) => {
     try {
-    const result = await axios.get("/api/UserSubscription")
+      const email:any =   user?.primaryEmailAddress?.emailAddress
+
+    const result = await axios.get(`/api/UserSubscription?email=${encodeURIComponent(email)}`)
     console.log(result.data.user)
       if(!result){
         console.log("subscription not found")
         return;
       }
+      console.log("user subscribed", result)
       setUserSubscription(true);
       setMaxWords(100000)
     } catch (error) {

@@ -55,9 +55,8 @@ export async function POST(request: NextRequest){
 export async function GET(request: NextRequest){
     try {
         await dbConnect();
-        // const url = new URL(request.url)
-        // const email = url.searchParams.get("email")
-        const email = "ganeshrana2039@gmail.com"
+        const url = new URL(request.url)
+        const email = url.searchParams.get("email")
         if(!email){
             return new NextResponse(
                 JSON.stringify({
