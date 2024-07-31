@@ -12,7 +12,6 @@ const UserSubscriptionSchema: Schema<UserSubscriptionInterface> = new Schema({
     username: {
         type: String,
         trim: true,
-        unique: true,
     },
     email: {
         type: String,
