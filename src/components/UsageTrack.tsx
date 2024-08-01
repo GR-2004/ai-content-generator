@@ -2,9 +2,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button } from './ui/button'
 import { useUser } from '@clerk/nextjs';
-import { db } from '@/utils/db';
-import { AIOutput, UserSubscription } from '@/utils/schema';
-import { eq } from 'drizzle-orm';
 import { TotalUsageContext } from '@/app/(context)/TotalUsageContext';
 import { UserSubscriptionContext } from '@/app/(context)/UserSubscriptionContext';
 import { UpdateCreditUsageContext } from '@/app/(context)/UpdateCreditUsageContext';

@@ -4,8 +4,6 @@ import SideNav from "@/components/SideNav";
 import React, { useContext, useState } from "react";
 import { Loader2Icon } from "lucide-react";
 import moment from "moment";
-import { UserSubscription } from "@/utils/schema";
-import { db } from "@/utils/db";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { UserSubscriptionContext } from "../(context)/UserSubscriptionContext";
