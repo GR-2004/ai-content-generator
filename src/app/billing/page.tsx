@@ -83,10 +83,10 @@ const BillingPage = () => {
 
   const saveSubscription = async (paymentId: string) => {
     try {
-      const userName = user?.fullName
+      const username = user?.fullName
       const email = user?.primaryEmailAddress?.emailAddress
-      const subscriptionResult = await axios.post("/api/UserSubscription", {userName, email, paymentId});
-      console.log(subscriptionResult);
+      const subscriptionResult = await axios.post("/api/UserSubscription", {username, email, paymentId});
+      console.log("subscriptionResult", subscriptionResult);
       if (subscriptionResult) {
         window.location.reload();
       }

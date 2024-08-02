@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest){
     try {
         await dbConnect();
-        const {paymentId, userName, email} = await request.json()
-        if(![paymentId, userName, email].every((item) => item)){
+        const {paymentId, username, email} = await request.json()
+        if(![paymentId, username, email].every((item) => item)){
             return new NextResponse(
                 JSON.stringify({
                     success: false,
@@ -17,7 +17,7 @@ export async function POST(request: NextRequest){
         }
         const user = await UserSubscription.create({
             email,
-            userName,
+            username,
             active: true,
             paymentId,
         })
