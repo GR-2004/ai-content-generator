@@ -7,6 +7,8 @@ import { useState } from "react";
 import { TotalUsageContext } from "./(context)/TotalUsageContext";
 import { UserSubscriptionContext } from "./(context)/UserSubscriptionContext";
 import { UpdateCreditUsageContext } from "./(context)/UpdateCreditUsageContext";
+import Header from "@/components/Header";
+import SideNav from "@/components/SideNav";
 
 const inter = Outfit({ subsets: ["latin"] });
 
@@ -34,7 +36,17 @@ export default function RootLayout({
         >
           <ClerkProvider>
             <html lang="en">
-              <body className={inter.className}>{children}</body>
+              <body className={inter.className}>
+                <div className="bg-slate-200 h-screen">
+                  <div className="md:w-64 hidden md:block fixed">
+                    <SideNav />
+                  </div>
+                  <div className="md:ml-64">
+                    <Header />
+                {children}
+                </div>
+                </div>
+              </body>
             </html>
           </ClerkProvider>
         </UpdateCreditUsageContext.Provider>
