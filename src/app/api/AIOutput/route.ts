@@ -1,13 +1,12 @@
 import dbConnect from "@/lib/dbConnect";
 import AIOutput from "@/models/AIOutput.model";
 import { getAuth } from "@clerk/nextjs/server";
-import { clerkClient } from "@clerk/nextjs/server"; 
+import { clerkClient } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-
 
 export async function POST(request: NextRequest) {
   try {
-    await dbConnect(); 
+    await dbConnect();
 
     const { formData, slug, aiResponse } = await request.json();
     console.log(formData, slug);
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
         message: "AI output created successfully",
         output,
       }),
-      { status: 201 } 
+      { status: 201 }
     );
   } catch (error: any) {
     console.error("An unexpected error occurred: ", error.message);
@@ -79,7 +78,7 @@ export async function POST(request: NextRequest) {
       JSON.stringify({
         success: false,
         message: "An error occurred while creating AI output",
-        error: error.message, 
+        error: error.message,
       }),
       { status: 500 }
     );
@@ -115,7 +114,7 @@ export async function GET(request: NextRequest) {
     }
 
     const output = await AIOutput.find({
-      createdBy: user.emailAddresses[0].emailAddress, 
+      createdBy: user.emailAddresses[0].emailAddress,
     });
 
     if (!output || output.length === 0) {
@@ -134,7 +133,7 @@ export async function GET(request: NextRequest) {
         message: "AI output fetched successfully",
         output,
       }),
-      { status: 200 } 
+      { status: 200 }
     );
   } catch (error: any) {
     console.error("An unexpected error occurred: ", error.message);
@@ -142,7 +141,7 @@ export async function GET(request: NextRequest) {
       JSON.stringify({
         success: false,
         message: "An error occurred while fetching AI output",
-        error: error.message, 
+        error: error.message,
       }),
       { status: 500 }
     );

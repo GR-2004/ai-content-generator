@@ -1,12 +1,10 @@
 "use client";
-
 import Header from "@/components/Header";
 import SideNav from "@/components/SideNav";
 import React, { useEffect, useState } from "react";
 import CopyButton from "./_components/CopyButton";
 import Image from "next/image";
 import Templates from "@/data/Templates";
-import { TEMPLATE } from "../../components/TemplateList";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import moment from "moment";

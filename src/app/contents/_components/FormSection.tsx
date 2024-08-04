@@ -66,7 +66,11 @@ const FormSection = ({
               </div>
             ))}
             <Button type="submit" disabled={loading} className="w-full py-6">
-              {loading ? <Loader2Icon className="animate-spin" /> : "Generate Content"}
+              {loading ? (
+                <Loader2Icon className="animate-spin" />
+              ) : (
+                "Generate Content"
+              )}
             </Button>
           </form>
         </div>

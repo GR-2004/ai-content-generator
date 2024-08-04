@@ -1,31 +1,35 @@
 "use client";
-import { UserButton } from '@clerk/nextjs'
-import { Menu, Search } from 'lucide-react'
-import Link from 'next/link';
-import React, { useState } from 'react'
+import { UserButton } from "@clerk/nextjs";
+import { Menu, Search } from "lucide-react";
+import Link from "next/link";
+import React, { useState } from "react";
 
 function Header() {
-
   const [menu, setMenu] = useState(false);
 
   const toggleMenu = () => {
-    setMenu(!menu)
-  }
+    setMenu(!menu);
+  };
 
   return (
-    <div className='p-5 shadow-sm border-b-2 bg-white flex justify-between items-center'>
-      <div className='flex gap-2 items-center
-       p-2 border rounded-md max-w-lg bg-white'>
-        <Search className='hidden sm:block'/>
-        <input type='text' placeholder='Search...'
-        className='outline-none hidden sm:block'
+    <div className="p-5 shadow-sm border-b-2 bg-white flex justify-between items-center">
+      <div
+        className="flex gap-2 items-center
+       p-2 border rounded-md max-w-lg bg-white"
+      >
+        <Search className="hidden sm:block" />
+        <input
+          type="text"
+          placeholder="Search..."
+          className="outline-none hidden sm:block"
         />
-        <Menu onClick={toggleMenu} className='sm:hidden cursor-pointer' />
+        <Menu onClick={toggleMenu} className="sm:hidden cursor-pointer" />
       </div>
-      <div className='flex gap-5 items-center'>
-        <h2 className='hidden sm:block bg-primary p-1 rounded-full text-sm text-white px-2'>
-        🔥 Where Imagination Meets Innovation</h2>
-      <UserButton/>
+      <div className="flex gap-5 items-center">
+        <h2 className="hidden sm:block bg-primary p-1 rounded-full text-sm text-white px-2">
+          🔥 Where Imagination Meets Innovation
+        </h2>
+        <UserButton />
       </div>
       <nav
         className={`${
@@ -34,7 +38,7 @@ function Header() {
           menu ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <hr className='bg-primary '/>
+        <hr className="bg-primary " />
         <ul className="space-y-4">
           <li>
             <Link
@@ -71,7 +75,7 @@ function Header() {
         </ul>
       </nav>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;

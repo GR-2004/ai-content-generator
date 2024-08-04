@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import SideNav from "@/components/SideNav";
 import React, { useContext, useState } from "react";
 import { Loader2Icon } from "lucide-react";
-import moment from "moment";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { UserSubscriptionContext } from "../(context)/UserSubscriptionContext";
@@ -11,8 +10,9 @@ import { UserSubscriptionContext } from "../(context)/UserSubscriptionContext";
 const BillingPage = () => {
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const {userSubscription, setUserSubscription} = useContext(UserSubscriptionContext);  
-
+  const { userSubscription, setUserSubscription } = useContext(
+    UserSubscriptionContext
+  );
 
   const createSubscription = async () => {
     try {
@@ -27,7 +27,7 @@ const BillingPage = () => {
     }
   };
 
-  const loadScript = (src:any) => {
+  const loadScript = (src: any) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
       script.src = src;
@@ -50,12 +50,12 @@ const BillingPage = () => {
     }
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
-   );
+    );
 
-   if (!res) {
+    if (!res) {
       alert("Razropay failed to load!!");
       return;
-  }
+    }
     const options = {
       key: razorpayKeyId,
       subscription_id: subscriptionId,
@@ -83,9 +83,13 @@ const BillingPage = () => {
 
   const saveSubscription = async (paymentId: string) => {
     try {
-      const username = user?.fullName
-      const email = user?.primaryEmailAddress?.emailAddress
-      const subscriptionResult = await axios.post("/api/UserSubscription", {username, email, paymentId});
+      const username = user?.fullName;
+      const email = user?.primaryEmailAddress?.emailAddress;
+      const subscriptionResult = await axios.post("/api/UserSubscription", {
+        username,
+        email,
+        paymentId,
+      });
       console.log("subscriptionResult", subscriptionResult);
       if (subscriptionResult) {
         window.location.reload();
@@ -146,8 +150,10 @@ const BillingPage = () => {
                   </li>
                 </ul>
                 <button
-            
-                  className={`mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 ${userSubscription && "hidden" }`}>
+                  className={`mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 ${
+                    userSubscription && "hidden"
+                  }`}
+                >
                   Currently Active Plan
                 </button>
               </div>
