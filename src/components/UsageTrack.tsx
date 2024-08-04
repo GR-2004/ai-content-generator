@@ -22,44 +22,42 @@ const UsageTrack = () => {
   useEffect(() => {
     if (user && user.primaryEmailAddress) {
       fetchData(user);
-      isUserSubscribed(user);
+      checkUserSubscription(user);
     }
-  }, [user && updateCreditUsage]);
+  }, [user, updateCreditUsage]);
 
+  // Fetch and update usage data
   const fetchData = async (user: any) => {
     try {
       const result: any = await axios.get("/api/AIOutput");
-      console.log("usageTrack response: ", result.data.output);
-      if (!result) {
-        return;
+      if (result && result.data && result.data.output) {
+        let total = 0;
+        result.data.output.forEach((res: any) => {
+          if (res.aiResponse) total += Number(res.aiResponse.length);
+        });
+        setTotalUsage(total);
       }
-      let total = 0;
-      result.data.output.forEach((res: any) => {
-        if (res.aiResponse) total += Number(res?.aiResponse.length);
-      });
-      setTotalUsage(total);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching data:", error);
     }
   };
 
-  const isUserSubscribed = async (user: any) => {
+  // Check if the user is subscribed and update the state accordingly
+  const checkUserSubscription = async (user: any) => {
     try {
-      const email: any = user?.primaryEmailAddress?.emailAddress;
-
+      const email = user?.primaryEmailAddress?.emailAddress;
       const result = await axios.get(
         `/api/UserSubscription?email=${encodeURIComponent(email)}`
       );
-      console.log(result.data.user);
-      if (!result) {
-        console.log("subscription not found");
-        return;
+      if (result && result.data && result.data.user) {
+        setUserSubscription(true);
+        setMaxWords(100000); // Update max words if the user is subscribed
+      } else {
+        setUserSubscription(false);
+        setMaxWords(10000); // Default max words for non-subscribed users
       }
-      console.log("user subscribed", result);
-      setUserSubscription(true);
-      setMaxWords(100000);
     } catch (error) {
-      console.log(error);
+      console.error("Error checking subscription:", error);
     }
   };
 
@@ -74,7 +72,7 @@ const UsageTrack = () => {
           ></div>
         </div>
         <h2 className="text-sm my-2">
-          {totalUsage}/{maxWords} credit used
+          {totalUsage}/{maxWords} credits used
         </h2>
       </div>
       <Link href="/billing">
