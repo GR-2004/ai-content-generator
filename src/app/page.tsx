@@ -9,21 +9,13 @@ const DashboardPage = () => {
   const [userSearchInput, setUserSearchInput] = useState<string>();
   return (
     <div>
-      <div className="bg-slate-200 h-screen">
-        <div className="md:w-64 hidden md:block fixed">
-          <SideNav />
-        </div>
-        <div className="md:ml-64">
-          <Header />
-          {/* Search Section */}
-          <SearchSection
-            onSearchInput={(value: string) => setUserSearchInput(value)}
-          />
+      {/* Search Section */}
+      <SearchSection
+        onSearchInput={(value: string) => setUserSearchInput(value)}
+      />
 
-          {/* template list section */}
-          <TemplateList userSearchInput={userSearchInput} />
-        </div>
-      </div>
+      {/* template list section */}
+      <TemplateList userSearchInput={userSearchInput} />
     </div>
   );
 };

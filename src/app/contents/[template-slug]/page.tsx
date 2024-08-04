@@ -77,31 +77,23 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
   };
 
   return (
-    <div className="bg-slate-200 h-screen">
-      <div className="md:w-64 hidden md:block fixed">
-        <SideNav />
-      </div>
-      <div className="md:ml-64">
-        <Header />
-        <div className="p-10">
-          <Link href={"/"}>
-            <Button>
-              <ArrowLeft />
-              Back
-            </Button>
-          </Link>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-5">
-            {/* formSection */}
-            <FormSection
-              selectedTemplate={selectedTemplate}
-              userFormInput={(v: any) => GenerateAIContent(v)}
-              loading={loading}
-            />
-            {/* outputSection */}
-            <div className="col-span-2">
-              <OutputSection aiResponse={aiResponse} />
-            </div>
-          </div>
+    <div className="p-10">
+      <Link href={"/"}>
+        <Button>
+          <ArrowLeft />
+          Back
+        </Button>
+      </Link>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-5">
+        {/* formSection */}
+        <FormSection
+          selectedTemplate={selectedTemplate}
+          userFormInput={(v: any) => GenerateAIContent(v)}
+          loading={loading}
+        />
+        {/* outputSection */}
+        <div className="col-span-2">
+          <OutputSection aiResponse={aiResponse} />
         </div>
       </div>
     </div>

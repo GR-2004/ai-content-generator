@@ -100,109 +100,97 @@ const BillingPage = () => {
   };
 
   return (
-    <div className="bg-slate-200 h-screen">
-      <div className="md:w-64 hidden md:block fixed">
-        <SideNav />
-      </div>
-      <div className="md:ml-64">
-        <Header />
-        <div className="p-10">
-          <h2 className="font-bold text-3xl text-center">
-            Upgrade With Monthly Plan
-          </h2>
+    <div className="p-10">
+      <h2 className="font-bold text-3xl text-center">
+        Upgrade With Monthly Plan
+      </h2>
 
-          <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
-              <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12 bg-white">
-                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-                <div className="text-center">
-                  <h2 className="text-lg font-medium text-gray-900">
-                    Free
-                    <span className="sr-only">Plan</span>
-                  </h2>
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
+          <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12 bg-white">
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <div className="text-center">
+              <h2 className="text-lg font-medium text-gray-900">
+                Free
+                <span className="sr-only">Plan</span>
+              </h2>
 
-                  <p className="mt-2 sm:mt-4">
-                    <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                      {" "}
-                      0{" "}
-                    </strong>
+              <p className="mt-2 sm:mt-4">
+                <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                  {" "}
+                  0{" "}
+                </strong>
 
-                    <span className="text-sm font-medium text-gray-700">
-                      /month
-                    </span>
-                  </p>
-                </div>
-
-                <ul className="mt-6 space-y-2">
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 10,000 Words/Month</h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 50+ Content Templates</h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">
-                      ✔️ Unlimited Download & Copy
-                    </h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 1 Month of History</h2>
-                  </li>
-                </ul>
-                <button
-                  className={`mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 ${
-                    userSubscription && "hidden"
-                  }`}
-                >
-                  Currently Active Plan
-                </button>
-              </div>
-              <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12 bg-white">
-                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-                <div className="text-center">
-                  <h2 className="text-lg font-medium text-gray-900">
-                    Monthly
-                    <span className="sr-only">Plan</span>
-                  </h2>
-
-                  <p className="mt-2 sm:mt-4">
-                    <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
-                      {" "}
-                      100{" "}
-                    </strong>
-
-                    <span className="text-sm font-medium text-gray-700">
-                      /month
-                    </span>
-                  </p>
-                </div>
-
-                <ul className="mt-6 space-y-2">
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 1,00,000 Words/Month</h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 50+ Template Access</h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">
-                      ✔️ Unlimited Download & Copy
-                    </h2>
-                  </li>
-                  <li className="flex items-center gap-1 mb-2">
-                    <h2 className="text-gray-700">✔️ 1 Year of History</h2>
-                  </li>
-                </ul>
-                <button
-                  disabled={loading}
-                  onClick={() => createSubscription()}
-                  className="mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 "
-                >
-                  {loading && <Loader2Icon className="animate-spin" />}
-                  {userSubscription ? "Active Plan" : "Get Started"}
-                </button>
-              </div>
+                <span className="text-sm font-medium text-gray-700">
+                  /month
+                </span>
+              </p>
             </div>
+
+            <ul className="mt-6 space-y-2">
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 10,000 Words/Month</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 50+ Content Templates</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ Unlimited Download & Copy</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 1 Month of History</h2>
+              </li>
+            </ul>
+            <button
+              className={`mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 ${
+                userSubscription && "hidden"
+              }`}
+            >
+              Currently Active Plan
+            </button>
+          </div>
+          <div className="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12 bg-white">
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <div className="text-center">
+              <h2 className="text-lg font-medium text-gray-900">
+                Monthly
+                <span className="sr-only">Plan</span>
+              </h2>
+
+              <p className="mt-2 sm:mt-4">
+                <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                  {" "}
+                  100{" "}
+                </strong>
+
+                <span className="text-sm font-medium text-gray-700">
+                  /month
+                </span>
+              </p>
+            </div>
+
+            <ul className="mt-6 space-y-2">
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 1,00,000 Words/Month</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 50+ Template Access</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ Unlimited Download & Copy</h2>
+              </li>
+              <li className="flex items-center gap-1 mb-2">
+                <h2 className="text-gray-700">✔️ 1 Year of History</h2>
+              </li>
+            </ul>
+            <button
+              disabled={loading}
+              onClick={() => createSubscription()}
+              className="mt-8 flex items-center gap-2 rounded-full border mx-auto border-indigo-600 bg-white px-12 py-3 text-center text-sm font-medium text-indigo-600 hover:ring-1 hover:ring-indigo-600 hover:bg-primary hover:text-white focus:outline-none focus:ring active:text-indigo-500 "
+            >
+              {loading && <Loader2Icon className="animate-spin" />}
+              {userSubscription ? "Active Plan" : "Get Started"}
+            </button>
           </div>
         </div>
       </div>
