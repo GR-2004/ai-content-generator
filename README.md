@@ -1,5 +1,8 @@
 # AI Content Generator
 Welcome to AI Content Generator, this project help you to create different types of contents.
+Used Google Gemini API to create various types of content, including Blog Content, Blog Topic Ideas, Instagram hashtags,creating code in multiple languages, YouTube SEO, YouTube Descriptions, YouTube tags, and Text Improvement Tools.
+
+Implemented Razorpay integration for secure and efficient payment processing, allowing users to seamlessly manage subscriptions and transactions.
 
 ## Project Link
 - [AI-Content-Generator](https://ai-content-generator-kappa.vercel.app/)
