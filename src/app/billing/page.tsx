@@ -53,7 +53,7 @@ const BillingPage = () => {
     );
 
     if (!res) {
-      alert("Razropay failed to load!!");
+      console.error("Razropay failed to load!!");
       return;
     }
     const options = {

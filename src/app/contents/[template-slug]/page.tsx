@@ -63,7 +63,6 @@ const CreateNewContent = (props: PROPSINTERFACE) => {
       setUpdateCreditUsage(Date.now());
     } catch (error) {
       setLoading(false);
-      alert(error);
     }
   };
 
